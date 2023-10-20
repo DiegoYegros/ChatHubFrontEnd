@@ -1,10 +1,11 @@
 import { Button } from "react-bootstrap"
 import { useState } from "react";
 import { Form} from "react-bootstrap";
+import Rooms from "./Rooms";
 const Lobby = ({joinRoom}) => {
     const [user, setUser] = useState();
     const [room, setRoom] = useState();
-    return <Form className='lobby'
+    return <><Form className='lobby'
         onSubmit={e => {
             e.preventDefault();
             joinRoom(user, room);
@@ -18,5 +19,7 @@ const Lobby = ({joinRoom}) => {
             Join
         </Button>
     </Form>
+    </>
+
 }
 export default Lobby;

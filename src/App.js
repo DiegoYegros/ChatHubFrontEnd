@@ -59,7 +59,7 @@ const App = () => {
   }
 
   return <div className='app'>
-      <h2>{room == null ?  "Select a name & room" : "Current room: "+room}</h2>
+      <h2>{room == null ?  "Create or Join room" : "Current room: "+room}</h2>
       
       {!connection ? <Lobby joinRoom={joinRoom} /> : <Chat messages = {messages} sendMessage = {sendMessage}
         closeConnection = {closeConnection}
