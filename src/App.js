@@ -10,6 +10,7 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [room, setRoom] = useState();
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState();
   const joinRoom = async (user, room) => {
     try {
       const connection = new HubConnectionBuilder()
@@ -36,6 +37,7 @@ const App = () => {
       await connection.invoke("JoinRoom", {user, room});
       setConnection(connection);
       setRoom(room);
+      setUser(user);
     } catch (e){
       console.log(e);
     }
@@ -62,6 +64,7 @@ const App = () => {
       {!connection ? <Lobby joinRoom={joinRoom} /> : <Chat messages = {messages} sendMessage = {sendMessage}
         closeConnection = {closeConnection}
         users = {users}
+        currentUser={user}
       />}
       
   </div>

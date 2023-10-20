@@ -54,20 +54,37 @@ hr.line {
 }
 
 .user-message {
-    text-align: right;
+    text-align: left;
     padding-right: 5px;
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;  
+    max-width: 60%;
+    margin-left: 300px;       
+}
+.other-message {
+    text-align: left;
+    padding-right: 5px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  
+    max-width: 60%;       
 }
 
 .message {
-    display: inline-flex;
-    margin: 0px auto 0px auto;
+    display: block;          /* Changed from inline-flex to block */
     padding: 5px;
     font-size: 18px;
-    color:white;
+    color: white;
     border-radius: 20px;
     margin-top: 3px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;         /* Ensures .message respects the width of .user-message */
 }
+
 
 .from-user {
     font-size: small;
