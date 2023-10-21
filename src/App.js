@@ -1,6 +1,6 @@
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Lobby from './components/Lobby';
 import Chat from './components/Chat';
@@ -9,48 +9,77 @@ const App = () => {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [room, setRoom] = useState();
+  const [rooms, setRooms] = useState([]);
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState();
+
+  useEffect(() => {
+    const initConnection = async () => {
+        try {
+            const newConnection = new HubConnectionBuilder()
+                .withUrl("http://localhost:5293/chat")
+                .configureLogging(LogLevel.Information)
+                .build();
+            newConnection.on("RoomsAndAmountOfPeople", updatedRooms => {
+                    setRooms(updatedRooms);
+            });
+            newConnection.on("UsersInRoom", (users) => {
+                setUsers(users);
+            });
+
+            newConnection.on("ReceiveMessage", (user, message) => {
+                setMessages(messages => [...messages, { user, message }]);
+            });
+
+            newConnection.onclose(e => {
+                console.error("Connection closed", e);
+                setConnection(null);
+                setRoom(null);
+                setMessages([]);
+                setUsers([]);
+                initConnection()
+            });
+
+            await newConnection.start();
+            console.log("Connection id: "+ newConnection.connectionId)
+            setConnection(newConnection);
+            console.log("Connection created")
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    initConnection();
+}, []);
+
+
   const joinRoom = async (user, room) => {
     try {
-      const connection = new HubConnectionBuilder()
-      .withUrl("http://localhost:5293/chat")
-      .configureLogging(LogLevel.Information)
-      .build();
-
-
-      connection.on("UsersInRoom", (users) => {
-        setUsers(users);
-      })
-      connection.on("ReceiveMessage", (user, message) => {
-        setMessages(messages => [...messages, {user, message}]);
-      });
-      connection.onclose(e => {
-        setConnection();
-        setRoom();
-        setMessages([]);
-        setUsers([]);
-        
-        
-      })
-      await connection.start();
-      await connection.invoke("JoinRoom", {user, room});
-      setConnection(connection);
-      setRoom(room);
-      setUser(user);
-    } catch (e){
-      console.log(e);
+        if (connection) {
+            await connection.invoke("JoinRoom", { user, room });
+            console.log("joined room with connection id:" + connection.connectionId)
+            setRoom(room);
+            setUser(user);
+        } else {
+            console.error("Connection not established yet.");
+        }
+    } catch (e) {
+        console.log(e);
     }
-  }
+};
+
+
   const closeConnection = async () => {
+    if (connection) {
         try {
             await connection.stop();
-        }
-         catch (e){
+          } catch (e) {
             console.log(e);
         }
     }
-  const sendMessage = async (message) => {
+};
+
+    const sendMessage = async (message) => {
     try {
       await connection.invoke("SendMessage", message);
     } catch (e){
@@ -61,7 +90,7 @@ const App = () => {
   return <div className='app'>
       <h2>{room == null ?  "Create or Join room" : "Current room: "+room}</h2>
       
-      {!connection ? <Lobby joinRoom={joinRoom} /> : <Chat messages = {messages} sendMessage = {sendMessage}
+      {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} /> : <Chat messages = {messages} sendMessage = {sendMessage}
         closeConnection = {closeConnection}
         users = {users}
         currentUser={user}

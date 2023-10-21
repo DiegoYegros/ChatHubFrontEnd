@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap"
 import { useState } from "react";
 import { Form} from "react-bootstrap";
 import Rooms from "./Rooms";
-const Lobby = ({joinRoom}) => {
+const Lobby = ({joinRoom, rooms}) => {
     const [user, setUser] = useState();
     const [room, setRoom] = useState();
     return <><Form className='lobby'
@@ -19,6 +19,7 @@ const Lobby = ({joinRoom}) => {
             Join
         </Button>
     </Form>
+    <Rooms rooms={rooms}/>
     </>
 
 }
