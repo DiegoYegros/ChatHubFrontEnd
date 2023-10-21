@@ -24,7 +24,7 @@ const MessageContainer = ({messages, currentUser}) => {
         {messages.map((m, index) =>
             <div key={index} className={getMessageClassName(m.user, currentUser)}>
                 <div className={`message ${checkIfAlmighty(m.user)}`}>{m.message}</div>
-                <div className="from-user">{m.user}</div>
+                <div className="from-user ms-2">{m.user}</div>
             </div>               
         )}
     </div>

@@ -48,7 +48,6 @@ const App = () => {
             console.error(e);
         }
     };
-
     initConnection();
 }, []);
 
@@ -88,7 +87,7 @@ const App = () => {
   }
 
   return <div className='app'>
-      <h2>{room == null ?  "Create or Join room" : "Current room: "+room}</h2>
+      <h2 className='mb-2'>{room == null ?  "Create or Join room" : "Current room: "+room}</h2>
       
       {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} /> : <Chat messages = {messages} sendMessage = {sendMessage}
         closeConnection = {closeConnection}

@@ -3,7 +3,7 @@ Form Button {
 }
 
 h2 {
-    color: #313131;
+    color: hsl(0, 0%, 90%);
 }
 
 h6 {
@@ -11,7 +11,7 @@ h6 {
 }
 
 hr.line {
-    border: 1px solid #313131;
+    border: 1px solid #e1dfdf;
     width: 175px;
 }
 
@@ -41,13 +41,13 @@ hr.line {
     background-color: #313131;
     color:white;
     width: 200px;
-    height: 455px;
+    height: 440px;
     margin-right: 4px;
 }
 
 .message-container {
     height: 400px;    
-    background-color: white;
+    background-color: rgb(37,40,42);
     overflow: auto;
     border-radius: 5px;
     margin-bottom: 2px;
@@ -70,11 +70,11 @@ hr.line {
     display: flex;
     flex-direction: column;
     align-items: flex-start;  
-    max-width: 60%;       
+    max-width: 60%;
 }
 
 .message {
-    display: block;          /* Changed from inline-flex to block */
+    display: block;
     padding: 5px;
     font-size: 18px;
     color: white;
@@ -82,12 +82,56 @@ hr.line {
     margin-top: 3px;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    max-width: 100%;         /* Ensures .message respects the width of .user-message */
+    max-width: 100%;         
 }
 
-
+.dark-input{
+    background-color: #333;  
+    color: rgb(209,204,201);          
+    border: 1px solid #555;
+}
+.dark-input::placeholder { 
+    color: rgb(209,204,201);
+    opacity: 0.4; 
+}
+.dark-input:focus{
+  box-shadow: #313131;
+  box-decoration-break: slice;
+  background-color: #313131;
+  color: #e1dfdf;
+}
 .from-user {
     font-size: small;
     margin-bottom: 3px;
     margin-right: 5px;
+    color: rgb(171, 173, 173)
+}
+.message-input{
+    background-color: rgb(37,40,42);
+    border-color: rgba(27,30,31, 0.5);
+    color: #e1dfdf;
+}
+.message-input:focus{
+  background-color: #313131;
+  color: #e1dfdf;
+}
+.message-send{
+    background-color: rgb(27,30,31);
+    border-color: rgba(27,30,31, 0.5);
+    border: none;
+
+}
+.card-body{
+  background-color:#333;
+  border-color: rgba(27,30,31, 0.5);
+  border: none;
+}
+.card-title{
+  color: #e1dfdf;
+  margin-right: 15em;
+  border: none;
+}
+.text-muted{
+  background-color:slategrey;
+  border: none;
 }
