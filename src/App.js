@@ -17,7 +17,7 @@ const App = () => {
     const initConnection = async () => {
         try {
             const newConnection = new HubConnectionBuilder()
-                .withUrl("http://localhost:5293/chat")
+                .withUrl("https://chathub-hsrb.onrender.com/chat")
                 .configureLogging(LogLevel.Information)
                 .build();
             newConnection.on("RoomsAndAmountOfPeople", updatedRooms => {
