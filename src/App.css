@@ -18,7 +18,7 @@ hr.line {
 
 
 .chat {
-    display: grid;
+    display:grid;
 }
 
 .leave-room {
@@ -30,9 +30,6 @@ hr.line {
     float: left;
     background-color: #313131;
     color: #e1dfdf;
-    height: 100%;
-
-    margin-right: 0.1em;
 }
 
 .message-container {
@@ -46,6 +43,8 @@ hr.line {
 .user-message {
     text-align: left;
     padding-right: 5px;
+    margin-right: 0.3em;
+    margin-top: 0.3em;
     font-size: 18px;
     display: flex;
     flex-direction: column;
@@ -55,6 +54,8 @@ hr.line {
 .other-message {
     text-align: left;
     padding-right: 5px;
+    margin-left: 0.3em;
+    margin-top: 0.3em;
     font-size: 18px;
     display: flex;
     flex-direction: column;
@@ -115,7 +116,7 @@ hr.line {
   border: none;
 }
 .white-color{
-    color: #e1dfdf
+    color: #e1dfdf;
 }
 .bottom-right{
     right: 6px;
@@ -123,12 +124,12 @@ hr.line {
 }
 
 .chat-container {
-    display:contents;
+    display: flex;
     width: 100%;
-    flex-direction: column-reverse;
+    flex-direction:column-reverse;
 }
 
 @media screen and (min-width: 768px) {     .chat-container {
-        flex-direction: row; 
+        flex-direction:column-reverse; 
     }
 }

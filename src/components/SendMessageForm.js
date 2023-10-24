@@ -13,13 +13,13 @@ const SendMessageForm = ({ sendMessage }) => {
             }}
         >
                     <FormControl 
-                        className="message-input" 
+                        className="message-input dark-input" 
                         placeholder='Message...' 
                         onChange={e => setMessage(e.target.value)} 
                         value={message}
                     />
                 <Button 
-                        className="message-send w-100" 
+                        className="message-send" 
                         variant='primary' 
                         type='submit' 
                         disabled={!message}

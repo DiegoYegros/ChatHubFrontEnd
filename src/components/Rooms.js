@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const Rooms = ({ rooms }) => {
     return (
-        <Container>
+        <>
             <h2 className="mb-4 mt-4">Available Rooms</h2>
             <Row>
                 {rooms.map((roomArray, index) => (
@@ -20,7 +20,7 @@ const Rooms = ({ rooms }) => {
                     </Col>
                 ))}
             </Row>
-        </Container>
+        </>
     );
 }
 

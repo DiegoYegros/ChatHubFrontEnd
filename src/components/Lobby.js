@@ -6,8 +6,10 @@ const Lobby = ({ joinRoom, rooms }) => {
     const [user, setUser] = useState();
     const [room, setRoom] = useState();
 
-    return (<>
-                    <Form 
+    return (<Container>
+            <h2 className="mb-4 mt-4">Select a room or join an existing one</h2>
+
+                    <Form
                         className='lobby'
                         onSubmit={e => {
                             e.preventDefault(); 
@@ -38,7 +40,7 @@ const Lobby = ({ joinRoom, rooms }) => {
                         </Button>
                     </Form>
             <Rooms rooms={rooms}/>
-            </>
+            </Container>
     );
 }
 
