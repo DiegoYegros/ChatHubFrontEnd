@@ -4,7 +4,6 @@
   import './App.css';
   import Lobby from './components/Lobby';
   import Chat from './components/Chat';
-  import { Button, Form, Container, Row, Col } from "react-bootstrap";
   const App = () => {
     const [connection, setConnection] = useState();
     const [messages, setMessages] = useState([]);
@@ -17,7 +16,7 @@
       const initConnection = async () => {
           try {
               const newConnection = new HubConnectionBuilder()
-                  .withUrl("http://localhost:5293/chat")
+                  .withUrl("https://chathub-hsrb.onrender.com/chat")
                   .configureLogging(LogLevel.Information)
                   .build();
               newConnection.on("RoomsAndAmountOfPeople", updatedRooms => {

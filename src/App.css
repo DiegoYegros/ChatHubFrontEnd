@@ -121,6 +121,15 @@ hr.line {
 .white-color{
     color: #e1dfdf;
 }
+.card-hoverable {
+    cursor: pointer;
+    transition: border 0.3s ease-in-out; 
+}
+
+.card-hoverable:hover {
+    border: 2px solid rgb(0,123,255); 
+}
+
 .bottom-right{
     right: 6px;
     bottom: 2px;

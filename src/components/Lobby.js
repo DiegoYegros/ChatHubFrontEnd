@@ -39,7 +39,7 @@ const Lobby = ({ joinRoom, rooms }) => {
                             Join
                         </Button>
                     </Form>
-            <Rooms rooms={rooms}/>
+            <Rooms rooms={rooms} user={user} joinRoom = {joinRoom}/>
             </Container>
     );
 }
