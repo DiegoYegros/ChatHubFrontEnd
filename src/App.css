@@ -125,6 +125,17 @@ hr.line {
     cursor: pointer;
     transition: border 0.3s ease-in-out; 
 }
+.dark-modal .modal-content {
+    background-color: #313131;
+    color: #fff;
+    background-color: rgb(37,40,42);
+    
+}
+
+.dark-modal .modal-header,
+.dark-modal .modal-footer {
+    border-color: #313131;
+}
 
 .card-hoverable:hover {
     border: 2px solid rgb(0,123,255); 

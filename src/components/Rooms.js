@@ -14,6 +14,12 @@ const Rooms = ({ rooms, user, joinRoom }) => {
         }
     }, [showModal]);
 
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        if (inputName.length > 0) {
+            handleJoin();
+        }
+    };
     const handleShow = (currentRoom) => {
         if (!user || user.length === 0){
             setShowModal(true)
@@ -57,19 +63,20 @@ const Rooms = ({ rooms, user, joinRoom }) => {
                 ))}
             </Row>
 
-            <Modal show={showModal} onHide={handleClose}>
+            <Modal show={showModal} onHide={handleClose} className='dark-modal'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Enter your name</Modal.Title>
+                    <Modal.Title className='white-color'>Enter your name</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={handleFormSubmit}>
                         <Form.Group controlId="formName">
                             <Form.Control 
                                 ref={nameInputRef}
                                 type="text" 
                                 value={inputName} 
                                 onChange={handleNameChange} 
-                                placeholder="John, Anon, Tracy" 
+                                placeholder="John, Anon, Tracy..."
+                                className="dark-input"
                             />
                         </Form.Group>
                     </Form>
