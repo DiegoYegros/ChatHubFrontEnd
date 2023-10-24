@@ -10,7 +10,7 @@ const Chat = ({ messages, sendMessage, closeConnection, users, currentUser, room
             <Col lg={12} md={12} className="chat d-flex flex-column">
                 <Row className="align-items-center mb-2"> 
                     <Col xs={6} md={8}>
-                        <h2 className="mb-4 mt-4 room-title">{room}</h2>
+                        <h2 className="mb-4 mt-4 room-title">Room: {room}</h2>
                     </Col>
                     <Col xs={3} md={2} className="text-end"> 
                         <Button variant='danger' onClick={() => closeConnection()}
