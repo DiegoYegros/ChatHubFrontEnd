@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Lobby from './components/Lobby';
 import Chat from './components/Chat';
-
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
 const App = () => {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
@@ -17,7 +17,7 @@ const App = () => {
     const initConnection = async () => {
         try {
             const newConnection = new HubConnectionBuilder()
-                .withUrl("https://chathub-hsrb.onrender.com/chat")
+                .withUrl("http://localhost:5293/chat")
                 .configureLogging(LogLevel.Information)
                 .build();
             newConnection.on("RoomsAndAmountOfPeople", updatedRooms => {
@@ -91,16 +91,19 @@ const App = () => {
     }
   }
 
-  return <div className='app'>
-      <h2 className='mb-2'>{room == null ?  "Create or Join room" : "Current room: "+room}</h2>
-      
-      {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} /> : <Chat messages = {messages} sendMessage = {sendMessage}
-        closeConnection = {closeConnection}
-        users = {users}
-        currentUser={user}
-      />}
-      
-  </div>
+  return (
+  <Container>
+      <Row className='justify-content-center'>
+        <Col xs={10} md={8} lg={12}>
+          <h2 className='mb-4 mt-4'>{room == null ?  "Create or Join room" : "Current room: "+room}</h2>
+        </Col>
+      </Row>
+         {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} /> : <Chat messages = {messages} sendMessage = {sendMessage}
+          closeConnection = {closeConnection}
+          users = {users}
+          currentUser={user}
+        />}
+  </Container>)
 }
 
 export default App;

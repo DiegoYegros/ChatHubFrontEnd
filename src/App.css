@@ -12,20 +12,10 @@ h6 {
 
 hr.line {
     border: 1px solid #e1dfdf;
-    width: 175px;
+
 }
 
-.app {
-    margin: auto;
-    padding-top: 150px;
-    width: 950px;
-    text-align: center;
-}
 
-.lobby {
-    width: 400px;
-    margin: auto;
-}
 
 .chat {
     display: grid;
@@ -39,18 +29,18 @@ hr.line {
 .user-list {
     float: left;
     background-color: #313131;
-    color:white;
-    width: 200px;
-    height: 440px;
-    margin-right: 4px;
+    color: #e1dfdf;
+    height: 100%;
+
+    margin-right: 0.1em;
 }
 
 .message-container {
-    height: 400px;    
     background-color: rgb(37,40,42);
-    overflow: auto;
     border-radius: 5px;
     margin-bottom: 2px;
+    height: 25em;
+    overflow-y: auto;
 }
 
 .user-message {
@@ -60,8 +50,7 @@ hr.line {
     display: flex;
     flex-direction: column;
     align-items: flex-end;  
-    max-width: 60%;
-    margin-left: 300px;       
+           
 }
 .other-message {
     text-align: left;
@@ -131,4 +120,15 @@ hr.line {
 .bottom-right{
     right: 6px;
     bottom: 2px;
+}
+
+.chat-container {
+    display:contents;
+    width: 100%;
+    flex-direction: column-reverse;
+}
+
+@media screen and (min-width: 768px) {     .chat-container {
+        flex-direction: row; 
+    }
 }
