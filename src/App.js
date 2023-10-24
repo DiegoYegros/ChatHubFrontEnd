@@ -27,13 +27,13 @@ const App = () => {
                 setUsers(users);
             });
 
-            newConnection.on("ReceiveMessage", (user, message) => {
-                  let utcDate = new Date(message.instant);
-                  let localDate = new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000);
-                  let hours = localDate.getHours().toString().padStart(2, '0');
-                  let minutes = localDate.getMinutes().toString().padStart(2, '0'); 
-                  let formattedTime = `${hours}:${minutes}`;
-                setMessages(messages => [...messages, { user, message: message.content }]);
+            newConnection.on("ReceiveMessage", (username, messageObject) => {
+                let utcDate = new Date(messageObject.instant);
+                let hours = utcDate.getHours();
+                let minutes = utcDate.getMinutes();
+                let formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+                let user = username + " " +formattedTime;
+                setMessages(messages => [...messages, { user, message: messageObject.content}]);
             });
 
             newConnection.onclose(e => {
