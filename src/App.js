@@ -11,9 +11,9 @@
     const [rooms, setRooms] = useState([]);
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState();
+    const [connectionError, setConnectionError] = useState(false);
 
-    useEffect(() => {
-      const initConnection = async () => {
+     const initConnection = async () => {
           try {
               const newConnection = new HubConnectionBuilder()
                   .withUrl("https://chathub-hsrb.onrender.com/chat")
@@ -50,10 +50,12 @@
               console.log("Connection created")
           } catch (e) {
               console.error(e);
+              setConnectionError(true);
           }
       };
+    useEffect(() => {
       initConnection();
-  }, []);
+      }, []);
 
 
     const joinRoom = async (user, room) => {
@@ -92,7 +94,8 @@
 
     return (
     <>
-          {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} connection={connection} /> : <Chat messages = {messages} sendMessage = {sendMessage}
+          {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} connection={connection} connectionError={connectionError} onRetryConnection={initConnection} />
+ : <Chat messages = {messages} sendMessage = {sendMessage}
             closeConnection = {closeConnection}
             users = {users}
             currentUser={user}

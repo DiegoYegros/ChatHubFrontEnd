@@ -137,8 +137,21 @@ hr.line {
     border-color: #313131;
 }
 
+.card-hoverable-error {
+    cursor: pointer;
+    transition: border 0.3s ease-in-out; 
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+
+.card-hoverable-error:hover {
+    border: 2px solid #e1dfdf; 
+}
 .card-hoverable:hover {
-    border: 2px solid rgb(0,123,255); 
+    border: 2px solid rgb(0,123,255);
 }
 
 .bottom-right{
