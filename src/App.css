@@ -3,7 +3,7 @@ Form Button {
 }
 
 h2 {
-    color: hsl(0, 0%, 90%);
+    color: #e1dfdf;
 }
 
 h6 {
@@ -121,16 +121,14 @@ hr.line {
     border: none;
 
 }
-.card-body{
-  background-color:#333;
-  border-color: rgba(27,30,31, 0.5);
-  border: none;
-}
 .card-title{
   color: #e1dfdf;
   border: none;
 }
-.text-muted{
-  background-color:slategrey;
-  border: none;
+.white-color{
+    color: #e1dfdf
+}
+.bottom-right{
+    right: 6px;
+    bottom: 2px;
 }
