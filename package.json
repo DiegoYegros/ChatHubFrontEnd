@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "bd": "npm run build && npm run deploy",
-    "add-domain": "echo \"chathub.diegoyegros.com\" > build/CNAME"
+    "add-domain": "echo chathub.diegoyegros.com > build/CNAME"
   },
   "eslintConfig": {
     "extends": [
