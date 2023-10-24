@@ -44,7 +44,7 @@ const Rooms = ({ rooms, user, joinRoom }) => {
 
     return (
         <>
-            <h2 className="mb-4 mt-4">Available Rooms</h2>
+            <h2 className="mb-4 mt-4 d-flex justify-content-center adaptative-title">Available Rooms</h2>
             <Row>
                 {rooms.map((roomArray, index) => (
                     <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-3">

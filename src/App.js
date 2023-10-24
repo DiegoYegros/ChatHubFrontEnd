@@ -92,7 +92,7 @@
 
     return (
     <>
-          {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} /> : <Chat messages = {messages} sendMessage = {sendMessage}
+          {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} connection={connection} /> : <Chat messages = {messages} sendMessage = {sendMessage}
             closeConnection = {closeConnection}
             users = {users}
             currentUser={user}

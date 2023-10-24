@@ -152,11 +152,50 @@ hr.line {
     flex-direction:column-reverse;
 }
 
+.status-box {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: 1px solid #555;  
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.status-box.connecting {
+    background-color: #2c2c2c;  
+    color: #888;  
+}
+
+.status-box.connected {
+    background-color: #28a745;  
+    color: #fff;  
+}
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.status-box.connecting .status-text {
+    animation: pulse 1.5s infinite;
+}
+
+
 @media screen and (min-width: 768px) {     .chat-container {
         flex-direction:column-reverse; 
     }
 }
 @media (max-width: 576px) {
+    .adaptative-title{
+        font-size: large;
+    }
     .leave-room-btn {
         font-size: 12px;
         padding: 5px 10px;
@@ -169,5 +208,30 @@ hr.line {
 
     .connected-users-dropdown .btn {
         font-size: 12px;
+    }
+    .connection-status {
+        width: 50px;  /* Adjust this to your desired size */
+        top: 5px;  /* Optional: Adjust this to change the vertical position */
+    }
+}
+.dot {
+     width: 6px;
+    height: 6px;
+    background-color: white;
+    border-radius: 50%;
+    animation: dotPulse 1s infinite alternate;
+    }
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+    }
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+    }
+@keyframes dotPulse {
+    from {
+    opacity: 1;
+    }
+    to {
+    opacity: 0.3;
     }
 }
