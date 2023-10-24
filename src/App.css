@@ -96,20 +96,23 @@ hr.line {
     margin-right: 5px;
     color: rgb(171, 173, 173)
 }
+.message-send{
+    align-self: auto;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+}
 .message-input{
     background-color: rgb(37,40,42);
     border-color: rgba(27,30,31, 0.5);
     color: #e1dfdf;
+    height: 100%;
+    width: 106%;
 }
 .message-input:focus{
   background-color: #313131;
   color: #e1dfdf;
-}
-.message-send{
-    background-color: rgb(27,30,31);
-    border-color: rgba(27,30,31, 0.5);
-    border: none;
-
 }
 .card-title{
   color: #e1dfdf;
@@ -131,5 +134,20 @@ hr.line {
 
 @media screen and (min-width: 768px) {     .chat-container {
         flex-direction:column-reverse; 
+    }
+}
+@media (max-width: 576px) {
+    .leave-room-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .room-title {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+
+    .connected-users-dropdown .btn {
+        font-size: 12px;
     }
 }

@@ -12,20 +12,27 @@ const SendMessageForm = ({ sendMessage }) => {
                 setMessage('');
             }}
         >
+            <Row className="d-flex justify-content-end">
+                <Col xs={10}>
                     <FormControl 
                         className="message-input dark-input" 
                         placeholder='Message...' 
                         onChange={e => setMessage(e.target.value)} 
                         value={message}
                     />
-                <Button 
-                        className="message-send" 
+                </Col>
+
+                <Col xs={2}>
+                    <Button 
+                        className="message-send"
                         variant='primary' 
                         type='submit' 
                         disabled={!message}
                     >
-                        Send
+                        <img width="30" height="30" src="https://img.icons8.com/windows/32/sent.png" alt="sent"/>
                     </Button>
+                </Col>
+            </Row>
         </Form>
     );
 }

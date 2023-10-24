@@ -1,26 +1,25 @@
 import { Button, Row, Col, Container } from "react-bootstrap";
 import MessageContainer from "./MessageContainer";
 import SendMessageForm from "./SendMessageForm";
-import ConnectedUsers from "./ConnectedUsers";
+import ConnectedUsersDropdown from "./ConnectedUsersDropdown";
 
 const Chat = ({ messages, sendMessage, closeConnection, users, currentUser, room }) => (
     <Container>
         <Row className="chat-container">
-            {/* Connected Users */}
-            <Col lg={2  } className="d-none d-lg-block">  {/* This line has been modified */}
-                <ConnectedUsers users={users} />
-            </Col>
-
             {/* Chat */}
             <Col lg={12} md={12} className="chat d-flex flex-column">
-                <Row className="align-items-center"> 
-                    <Col xs={8} md={10}>
-                        <h2 className="mb-4 mt-4">Current room: {room}</h2>
+                <Row className="align-items-center mb-2"> 
+                    <Col xs={6} md={8}>
+                        <h2 className="mb-4 mt-4 room-title">Current room: {room}</h2>
                     </Col>
-                    <Col xs={4} md={2} className="text-end"> 
-                        <Button variant='danger' onClick={() => closeConnection()}>
+                    <Col xs={3} md={2} className="text-end"> 
+                        <Button variant='danger' onClick={() => closeConnection()}
+                            className="leave-room-btn">
                             Leave Room
                         </Button>
+                    </Col>
+                    <Col xs={3} md={2}>
+                        <ConnectedUsersDropdown users={users} className="connected-users-dropdown text-end"/>
                     </Col>
                 </Row>
                 <MessageContainer messages={messages} currentUser={currentUser} />
@@ -31,4 +30,3 @@ const Chat = ({ messages, sendMessage, closeConnection, users, currentUser, room
 )
 
 export default Chat;
-
