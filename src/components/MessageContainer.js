@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
-import { Container, Row, Col } from "react-bootstrap";
 
-const MessageContainer = ({ messages, currentUser }) => {
+const MessageContainer = ({ messages, currentConnectionId }) => {
     const messageRef = useRef();
 
     useEffect(() => {
@@ -15,8 +14,9 @@ const MessageContainer = ({ messages, currentUser }) => {
         }
     }, [messages]);
 
-    const getMessageClassName = (user, currentUser) => {
-        return user.substring(0, user.length - 6) === currentUser ? `user-message` : `other-message`;
+    const getMessageClassName = (connectionId, currentConnectionId) => {
+        
+        return connectionId === currentConnectionId ? `user-message` : `other-message`;
     }
 
     const checkIfAlmighty = (user) => {
@@ -26,7 +26,7 @@ const MessageContainer = ({ messages, currentUser }) => {
     return (
          <div ref={messageRef} className="message-container">
             {messages.map((m, index) => (
-                <div key={index} className={getMessageClassName(m.user, currentUser)}>
+                <div key={index} className={getMessageClassName(m.connectionId, currentConnectionId)}>
                         <div className={`message ${checkIfAlmighty(m.user)}`}>{m.message}</div>
                         <div className="from-user ms-2">{m.user}</div>
                 </div>

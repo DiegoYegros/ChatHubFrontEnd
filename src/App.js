@@ -32,7 +32,7 @@
                   let minutes = utcDate.getMinutes();
                   let formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
                   let user = username + " " +formattedTime;
-                  setMessages(messages => [...messages, { user, message: messageObject.content}]);
+                  setMessages(messages => [...messages, { user, message: messageObject.content, connectionId: messageObject.connectionId}]);
               });
 
               newConnection.onclose(e => {
@@ -62,7 +62,6 @@
       try {
           if (connection) {
               await connection.invoke("JoinRoom", { user, room });
-              console.log("joined room with connection id:" + connection.connectionId)
               setRoom(room);
               setUser(user);
           } else {
@@ -95,12 +94,12 @@
     return (
     <>
           {!room ? <Lobby joinRoom={joinRoom} rooms={rooms} connection={connection} connectionError={connectionError} onRetryConnection={initConnection} />
- : <Chat messages = {messages} sendMessage = {sendMessage}
-            closeConnection = {closeConnection}
-            users = {users}
-            currentUser={user}
-            room = {room}
-          />}
+            : <Chat messages = {messages} sendMessage = {sendMessage}
+                    closeConnection = {closeConnection}
+                    users = {users}
+                    currentConnectionId={connection.connectionId}
+                      room = {room}
+                                      />}
     </>)
   }
 

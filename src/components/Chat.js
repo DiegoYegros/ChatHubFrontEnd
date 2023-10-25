@@ -3,7 +3,7 @@ import MessageContainer from "./MessageContainer";
 import SendMessageForm from "./SendMessageForm";
 import ConnectedUsersDropdown from "./ConnectedUsersDropdown";
 
-const Chat = ({ messages, sendMessage, closeConnection, users, currentUser, room }) => (
+const Chat = ({ messages, sendMessage, closeConnection, users, currentConnectionId, room }) => (
     <Container>
         <Row className="chat-container">
             {/* Chat */}
@@ -22,7 +22,7 @@ const Chat = ({ messages, sendMessage, closeConnection, users, currentUser, room
                         <ConnectedUsersDropdown users={users} className="connected-users-dropdown text-end"/>
                     </Col>
                 </Row>
-                <MessageContainer messages={messages} currentUser={currentUser} />
+                <MessageContainer messages={messages} currentConnectionId={currentConnectionId} />
                 <SendMessageForm sendMessage={sendMessage} />
             </Col>
         </Row>
