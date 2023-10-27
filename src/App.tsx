@@ -1,17 +1,25 @@
-import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { HubConnectionBuilder, LogLevel, HubConnection } from "@microsoft/signalr";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Lobby from "./components/Lobby";
 import Chat from "./components/Chat";
-const App = () => {
-  const [connection, setConnection] = useState();
-  const [messages, setMessages] = useState([]);
-  const [room, setRoom] = useState();
-  const [rooms, setRooms] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState();
-  const [connectionError, setConnectionError] = useState(false);
+import React from "react";
+
+type MessageObject = {
+  user: string;
+  message: string;
+  connectionId: string;
+};
+
+const App: React.FC = () => {
+  const [connection, setConnection] = useState<HubConnection | null>(null);
+  const [messages, setMessages] = useState<MessageObject[]>([]);
+  const [room, setRoom] = useState<string | null>();
+  const [rooms, setRooms] = useState<string[]>([]);
+  const [users, setUsers] = useState<string[]>([]);
+  const [user, setUser] = useState<string | null>();
+  const [connectionError, setConnectionError] = useState<boolean>(false);
 
   const initConnection = async () => {
     try {
@@ -66,7 +74,7 @@ const App = () => {
     initConnection();
   }, []);
 
-  const joinRoom = async (user, room) => {
+  const joinRoom = async (user: string, room: string) => {
     try {
       if (connection) {
         await connection.invoke("JoinRoom", { user, room });
@@ -90,8 +98,11 @@ const App = () => {
     }
   };
 
-  const sendMessage = async (message, imageData) => {
+  const sendMessage = async (message: string, imageData: string) => {
     try {
+      if (!connection){
+        throw Error("No hay una conexión.");
+      }
       const messageObject = {
         Content: message,
         Instant: new Date().toISOString(),
@@ -104,7 +115,7 @@ const App = () => {
     }
   };
 
-  return (
+   return (
     <>
       {!room ? (
         <Lobby
@@ -120,7 +131,7 @@ const App = () => {
           sendMessage={sendMessage}
           closeConnection={closeConnection}
           users={users}
-          currentConnectionId={connection.connectionId}
+          currentConnectionId={connection ? connection.connectionId : ''}
           room={room}
         />
       )}
