@@ -83,9 +83,15 @@
       }
   };
 
-      const sendMessage = async (message) => {
+      const sendMessage = async (message, imageData) => {
       try {
-        await connection.invoke("SendMessage", message);
+        const messageObject = {
+          Content: message,
+          Instant: new Date().toISOString(),
+          ConnectionId: connection.connectionId,
+          ImageData: imageData
+      }
+        await connection.invoke("SendMessage", messageObject);
       } catch (e){
         console.log(e);
       }

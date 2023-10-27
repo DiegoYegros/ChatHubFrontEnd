@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Col, Row } from "react-bootstrap";
 
 const MessageContainer = ({ messages, currentConnectionId }) => {
     const messageRef = useRef();
@@ -23,7 +24,8 @@ const MessageContainer = ({ messages, currentConnectionId }) => {
         return user.substring(0, user.length - 6) === "Almighty" ? "bg-secondary" : "bg-primary";
     }
 
-    return (
+    return (<Row>
+    <Col>
          <div ref={messageRef} className="message-container">
             {messages.map((m, index) => (
                 <div key={index} className={getMessageClassName(m.connectionId, currentConnectionId)}>
@@ -32,6 +34,8 @@ const MessageContainer = ({ messages, currentConnectionId }) => {
                 </div>
             ))}
         </div>
+        </Col>
+        </Row>
     );
 }
 

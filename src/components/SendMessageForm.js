@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button, FormControl, Row, Col } from "react-bootstrap";
+import { Form, Button, FormControl, Row, Col, InputGroup } from "react-bootstrap";
 
 const SendMessageForm = ({ sendMessage }) => {
     const [message, setMessage] = useState('');
@@ -14,14 +14,14 @@ const SendMessageForm = ({ sendMessage }) => {
         >
             <Row className="d-flex justify-content-end">
                 <Col xs={10}>
-                    <FormControl 
-                        className="message-input dark-input" 
+                    <FormControl
+                        as="textarea"
+                        className="message-input dark-input"
                         placeholder='Message...' 
                         onChange={e => setMessage(e.target.value)} 
                         value={message}
                     />
                 </Col>
-
                 <Col xs={2}>
                     <Button 
                         className="message-send"

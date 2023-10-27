@@ -99,6 +99,7 @@ hr.line {
 .message-send{
     align-self: auto;
     justify-content: center;
+    box-sizing: border-box;
     align-items: center;
     align-content: center;
     display: flex;
@@ -107,8 +108,20 @@ hr.line {
     background-color: rgb(37,40,42);
     border-color: rgba(27,30,31, 0.5);
     color: #e1dfdf;
-    height: 100%;
-    width: 103%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    resize: vertical;
+    scrollbar-width: none;
+    width: 102.2%;
+    height: 2.75em;
+    -ms-overflow-style: none;
+}
+textarea.form-control.message-input {
+    min-height: 0;
+}
+
+.message-input::-webkit-scrollbar {
+    width: 0;
 }
 .message-input:focus{
   background-color: #313131;
