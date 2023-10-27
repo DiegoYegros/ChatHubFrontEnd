@@ -104,6 +104,17 @@ hr.line {
     align-content: center;
     display: flex;
 }
+.dark-input-menu .no-border{
+    border: none;
+}
+.dark-input:hover{
+    background-color: #434343;
+    color: rgb(219,213,217);
+}
+.dark-input-menu{
+    background-color: #333;
+    border: none;
+}
 .message-input{
     background-color: rgb(37,40,42);
     border-color: rgba(27,30,31, 0.5);
