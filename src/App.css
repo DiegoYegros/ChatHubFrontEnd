@@ -247,8 +247,8 @@ textarea.form-control.message-input {
         font-size: 12px;
     }
     .connection-status {
-        width: 50px;  /* Adjust this to your desired size */
-        top: 5px;  /* Optional: Adjust this to change the vertical position */
+        width: 50px;  
+        top: 5px;
     }
 }
 .dot {
