@@ -1,15 +1,28 @@
 import { useState } from "react";
-import { Form, Button, FormControl, Row, Col, InputGroup } from "react-bootstrap";
+import { Form, Button, FormControl, Row, Col} from "react-bootstrap";
 
 const SendMessageForm = ({ sendMessage }) => {
     const [message, setMessage] = useState('');
 
+const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && e.shiftKey){
+        return
+    }
+    if (e.key === 'Enter'){
+        e.preventDefault();
+        handleSubmit();
+    }
+    
+}
+const handleSubmit = () => {
+    sendMessage(message)
+    setMessage('');
+}
     return (
         <Form 
             onSubmit={e => {
                 e.preventDefault();
-                sendMessage(message);
-                setMessage('');
+                handleSubmit();
             }}
         >
             <Row className="d-flex justify-content-end">
@@ -20,6 +33,7 @@ const SendMessageForm = ({ sendMessage }) => {
                         placeholder='Message...' 
                         onChange={e => setMessage(e.target.value)} 
                         value={message}
+                        onKeyDown={handleKeyDown}
                     />
                 </Col>
                 <Col xs={2}>
