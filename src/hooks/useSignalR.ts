@@ -7,7 +7,7 @@ import {
 import { MessageObject } from "../types";
 
 const useSignalR = () => {
-  const URL: string = "http://localhost:5293/chat";
+  const URL: string = "https://chathub-hsrb.onrender.com/chat";
   const [connection, setConnection] = useState<HubConnection | null>(null);
   const [messages, setMessages] = useState<MessageObject[]>([]);
   const [rooms, setRooms] = useState<string[]>([]);
