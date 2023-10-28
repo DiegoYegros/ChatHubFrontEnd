@@ -102,6 +102,7 @@ const Lobby = ({
             <Button
               variant="success"
               type="submit"
+              className="w-100"
               disabled={!user || !room}
               block
             >

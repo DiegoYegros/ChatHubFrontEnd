@@ -1,8 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Col, Row } from "react-bootstrap";
 
 const MessageContainer = ({ messages, currentConnectionId }) => {
   const messageRef = useRef();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedImageSrc, setSelectedImageSrc] = useState("");
+
+  const handleImageClick = (src) => {
+    setSelectedImageSrc(src);
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedImageSrc("");
+  };
 
   useEffect(() => {
     if (messageRef && messageRef.current) {
@@ -40,11 +51,30 @@ const MessageContainer = ({ messages, currentConnectionId }) => {
               )}
             >
               <div className={`message ${checkIfAlmighty(m.user)}`}>
+                {m.imageData !== "" && m.imageData ? (
+                  <div className="message-image-container">
+                    <img
+                      src={m.imageData}
+                      alt=""
+                      className="message-image"
+                      onClick={() => handleImageClick(m.imageData)}
+                    />
+                  </div>
+                ) : null}
                 {m.message}
               </div>
               <div className="from-user ms-2">{m.user}</div>
             </div>
           ))}
+          {isModalOpen && (
+            <div className="modal-background" onClick={closeModal}>
+              <img
+                src={selectedImageSrc}
+                alt="Enlarged"
+                className="enlarged-image"
+              />
+            </div>
+          )}
         </div>
       </Col>
     </Row>

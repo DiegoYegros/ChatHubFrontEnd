@@ -12,13 +12,13 @@ const Chat = ({
   room,
 }) => (
   <Container>
-    <Row className="chat-container">
-      <Col lg={12} md={12} className="chat d-flex flex-column">
+    <Row className="chat-container ">
+      <Col lg={12} md={12} className="chat d-flex flex-column p-0">
         <Row className="align-items-center mb-2">
-          <Col xs={6} md={8}>
+          <Col xs={6} md={8} p-0 className="p-0">
             <h2 className="mb-4 mt-4 room-title">Room: {room}</h2>
           </Col>
-          <Col xs={3} md={2} className="text-end">
+          <Col xs={3} md={2} className="text-end p-0">
             <Button
               variant="danger"
               onClick={() => closeConnection()}
@@ -27,7 +27,7 @@ const Chat = ({
               Leave Room
             </Button>
           </Col>
-          <Col xs={3} md={2}>
+          <Col xs={3} md={2} className="p-0">
             <ConnectedUsersDropdown
               users={users}
               className="connected-users-dropdown text-end"
