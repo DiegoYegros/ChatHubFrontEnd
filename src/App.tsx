@@ -8,7 +8,7 @@ const App: React.FC = () => {
   
   const { connection, messages, rooms, users, connectionError, sendMessage, joinRoom, initConnection } = useSignalR();
   const [room, setRoom] = useState<string | null>();
-  const [user, setUser] = useState<string | null>();
+  const [, setUser] = useState<string | null>();
 
   
   const handleJoinRoom = async (user: string, room: string) => {
