@@ -1,12 +1,20 @@
-import { useState, useEffect, useRef } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 
-const MessageContainer = ({ messages, currentConnectionId }) => {
-  const messageRef = useRef();
-  const [isModalOpen, setModalOpen] = useState(false);
+interface Props {
+
+  messages: Message[];
+  currentConnectionId: string | null;
+
+}
+
+
+const MessageContainer : React.FC<Props> = ({ messages, currentConnectionId }) => {
+  const messageRef = useRef<any>();
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedImageSrc, setSelectedImageSrc] = useState("");
 
-  const handleImageClick = (src) => {
+  const handleImageClick = (src: SetStateAction<string>) => {
     setSelectedImageSrc(src);
     setModalOpen(true);
   };
@@ -26,13 +34,13 @@ const MessageContainer = ({ messages, currentConnectionId }) => {
     }
   }, [messages]);
 
-  const getMessageClassName = (connectionId, currentConnectionId) => {
+  const getMessageClassName = (connectionId: string | null, currentConnectionId: string | null) => {
     return connectionId === currentConnectionId
       ? `user-message`
       : `other-message`;
   };
 
-  const checkIfAlmighty = (user) => {
+  const checkIfAlmighty = (user: string) => {
     return user.substring(0, user.length - 6) === "Almighty"
       ? "bg-secondary"
       : "bg-primary";
@@ -63,10 +71,10 @@ const MessageContainer = ({ messages, currentConnectionId }) => {
                 ) : null}
                 {m.message}
               </div>
-              <div className="from-user ms-2">{m.user}</div>
+              <div className="from-user ms-string[]2">{m.user}</div>
             </div>
           ))}
-          {isModalOpen && (
+          {modalOpen && (
             <div className="modal-background" onClick={closeModal}>
               <img
                 src={selectedImageSrc}

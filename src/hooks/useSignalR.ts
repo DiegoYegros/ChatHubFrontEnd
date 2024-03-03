@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
 import {
+  HubConnection,
   HubConnectionBuilder,
   LogLevel,
-  HubConnection,
 } from "@microsoft/signalr";
-import { MessageObject } from "../types";
+import { useEffect, useState } from "react";
 
 const useSignalR = () => {
   const URL: string = "https://chathub-hsrb.onrender.com/chat";
     const [connection, setConnection] = useState<HubConnection | null>(null);
-  const [messages, setMessages] = useState<MessageObject[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [rooms, setRooms] = useState<string[]>([]);
   const [users, setUsers] = useState<string[]>([]);
   const [connectionError, setConnectionError] = useState<boolean>(false);
@@ -22,10 +21,8 @@ const useSignalR = () => {
         .build();
       newConnection.on("RoomsAndAmountOfPeople", setRooms);
       newConnection.on("UsersInRoom", setUsers);
-
-      newConnection.on("ReceiveMessage", (username, messageObject) => {
-        console.log(messageObject.instant)
-        let utcDate = new Date(messageObject.instant);
+      newConnection.on("ReceiveMessage", (username, message) => {
+        let utcDate = new Date(message.instant);
         let localTime = utcDate.toLocaleTimeString();
         let time = localTime.substring(0, localTime.indexOf(" ")).split(":");
         let hours = time[0]
@@ -38,10 +35,10 @@ const useSignalR = () => {
           ...prevMessages,
           {
             user,
-            instant: messageObject.Instant,
-            message: messageObject.content,
-            imageData: messageObject.imageData,
-            connectionId: messageObject.connectionId,
+            instant: message.Instant,
+            message: message.content,
+            imageData: message.imageData,
+            connectionId: message.connectionId,
           },
         ]);
       });

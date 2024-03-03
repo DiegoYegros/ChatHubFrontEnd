@@ -1,12 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col, Modal, Button, Form } from "react-bootstrap";
+import { SetStateAction, useEffect, useRef, useState } from "react";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 
-const Rooms = ({ rooms, user, joinRoom }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [inputName, setInputName] = useState("");
-  const [room, setRoom] = useState();
-  const nameInputRef = useRef(null);
+
+interface Props {
+  rooms: string[];
+  user: string;
+  joinRoom: (user: string, room: string) => void;
+
+}
+const Rooms: React.FC<Props> = ({ rooms, user, joinRoom }) => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [inputName, setInputName] = useState<string>("");
+  const [room, setRoom] = useState<string>("");
+  const nameInputRef = useRef<any>(null);
 
   useEffect(() => {
     if (showModal) {
@@ -14,13 +21,13 @@ const Rooms = ({ rooms, user, joinRoom }) => {
     }
   }, [showModal]);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (inputName.length > 0) {
       handleJoin();
     }
   };
-  const handleShow = (currentRoom) => {
+  const handleShow = (currentRoom: string) => {
     if (!user || user.length === 0) {
       setShowModal(true);
       setRoom(currentRoom);
@@ -39,7 +46,7 @@ const Rooms = ({ rooms, user, joinRoom }) => {
     joinRoom(inputName, room);
   };
 
-  const handleNameChange = (e) => setInputName(e.target.value);
+  const handleNameChange = (e: { target: { value: SetStateAction<string>; }; }) => setInputName(e.target.value);
 
   return (
     <>
@@ -47,7 +54,7 @@ const Rooms = ({ rooms, user, joinRoom }) => {
         Available Rooms
       </h2>
       <Row>
-        {rooms.map((roomArray, index) => (
+        {rooms.map((roomArray: any, index) => (
           <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-3">
             <div
               className="card text-white bg-dark position-relative card-hoverable"

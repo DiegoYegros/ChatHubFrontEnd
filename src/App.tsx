@@ -1,9 +1,10 @@
-import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from "react";
 import "./App.css";
-import Lobby from "./components/Lobby";
 import Chat from "./components/Chat";
+import Lobby from "./components/Lobby";
 import useSignalR from "./hooks/useSignalR";
+import "./models/Message";
 const App: React.FC = () => {
   
   const { connection, messages, rooms, users, connectionError, sendMessage, joinRoom, initConnection } = useSignalR();
