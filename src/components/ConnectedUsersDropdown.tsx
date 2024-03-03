@@ -1,5 +1,11 @@
 import { Dropdown } from "react-bootstrap";
-const ConnectedUsersDropdown = ({ users }) => (
+
+interface ConnectedUsersDropdownProps {
+  users: string[];
+  className: string;
+}
+
+const ConnectedUsersDropdown : React.FC<ConnectedUsersDropdownProps> = ({ users }) => (
   <Dropdown align="end" className="d-flex justify-content-end">
     <Dropdown.Toggle variant="primary">
       {users.length === 1 ? users.length + " user" : users.length + " users"}

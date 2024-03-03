@@ -1,24 +1,30 @@
 import { useRef, useState } from "react";
-import uploadIcon from "../assets/uploadIcon.png";
 import {
-  InputGroup,
-  Form,
   Button,
-  FormControl,
-  Row,
   Col,
+  Form,
+  FormControl,
+  InputGroup,
+  Row,
 } from "react-bootstrap";
+import uploadIcon from "../assets/uploadIcon.png";
 
-const SendMessageForm = ({ sendMessage }) => {
+interface Props {
+  sendMessage: (message: string, imageData: string) => void;
+}
+
+const SendMessageForm: React.FC<Props> = ({sendMessage}) => {
   const [message, setMessage] = useState("");
-  const [imageData, setImageData] = useState("");
-  const fileInputRef = useRef(null);
+  const [imageData, setImageData] = useState<any>({imageData: ""});
+  const fileInputRef = useRef<any>(null);
 
   const handleImageUploadClick = () => {
-    fileInputRef.current.click();
+        if (fileInputRef.current != null){
+          fileInputRef.current.click();
+        }
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: any) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -30,7 +36,7 @@ const SendMessageForm = ({ sendMessage }) => {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: { key: string; shiftKey: any; preventDefault: () => void; }) => {
     if (e.key === "Enter" && e.shiftKey) {
       return;
     }

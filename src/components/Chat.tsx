@@ -1,15 +1,25 @@
-import { Button, Row, Col, Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import ConnectedUsersDropdown from "./ConnectedUsersDropdown";
 import MessageContainer from "./MessageContainer";
 import SendMessageForm from "./SendMessageForm";
-import ConnectedUsersDropdown from "./ConnectedUsersDropdown";
 
-const Chat = ({
+
+interface ChatProps {
+  messages: Message[];
+  sendMessage: (message: string, imageData: string) => void;
+  closeConnection: () => void;
+  users: string[];
+  currentConnectionId: string | null;
+  room: string;
+}
+
+const Chat: React.FC<ChatProps> = ({
   messages,
   sendMessage,
   closeConnection,
   users,
   currentConnectionId,
-  room,
+  room
 }) => (
   <Container>
     <Row className="chat-container ">

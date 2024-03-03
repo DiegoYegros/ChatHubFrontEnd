@@ -1,18 +1,32 @@
-import { Button, Form, Container, Row, Col } from "react-bootstrap";
+import { HubConnection } from "@microsoft/signalr";
 import { useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Rooms from "./Rooms";
 
-const Lobby = ({
+
+interface LobbyProps {
+  joinRoom: (user: string, room: string) => object;
+  rooms: string[];
+  connection: HubConnection | null;
+  connectionError: boolean;
+  onRetryConnection: () => Promise<void>;
+}
+
+const Lobby : React.FC<LobbyProps> = ({
   joinRoom,
   rooms,
   connection,
   connectionError,
   onRetryConnection,
 }) => {
-  const [user, setUser] = useState();
-  const [room, setRoom] = useState();
+  const [user, setUser] = useState<string>("");
+  const [room, setRoom] = useState<string>("");
 
-  const ConnectionStatusBox = ({ isConnected, onErrorClick }) => {
+  interface ConnectionStatusBoxProps {
+    isConnected: boolean;
+    onErrorClick: () => false | (() => Promise<void>);
+  }
+  const ConnectionStatusBox: React.FC<ConnectionStatusBoxProps> = ({ isConnected, onErrorClick }) => {
     return (
       <div
         className={`card position-fixed top-0 end-0 mt-3 me-3 p-3 connection-status rounded ${
@@ -71,7 +85,7 @@ const Lobby = ({
     >
       <ConnectionStatusBox
         isConnected={!!connection}
-        onErrorClick={connectionError ? onRetryConnection : null}
+        onErrorClick={() => connectionError ? onRetryConnection : false}
       />
       <Row className="justify-content-center">
         <Col xs={12} md={12} lg={12}>
@@ -104,7 +118,6 @@ const Lobby = ({
               type="submit"
               className="w-100"
               disabled={!user || !room}
-              block
             >
               Join
             </Button>
