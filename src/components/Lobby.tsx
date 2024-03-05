@@ -1,8 +1,8 @@
 import { HubConnection } from "@microsoft/signalr";
 import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import ConnectionStatusBox from "./ConnectionStatusBox";
 import Rooms from "./Rooms";
-
 
 interface LobbyProps {
   joinRoom: (user: string, room: string) => object;
@@ -22,57 +22,6 @@ const Lobby : React.FC<LobbyProps> = ({
   const [user, setUser] = useState<string>("");
   const [room, setRoom] = useState<string>("");
 
-  interface ConnectionStatusBoxProps {
-    isConnected: boolean;
-    onErrorClick: () => false | (() => Promise<void>);
-  }
-  const ConnectionStatusBox: React.FC<ConnectionStatusBoxProps> = ({ isConnected, onErrorClick }) => {
-    return (
-      <div
-        className={`card position-fixed top-0 end-0 mt-3 me-3 p-3 connection-status rounded ${
-          isConnected
-            ? "bg-success"
-            : connectionError
-            ? "bg-danger card-hoverable-error"
-            : "bg-secondary"
-        }`}
-        style={{
-          width: "100px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          cursor: connectionError ? "pointer" : "default",
-        }}
-        onClick={onErrorClick}
-        title={connectionError ? "Retry connection" : "Connected"}
-      >
-        {isConnected ? (
-          <svg
-            width="24"
-            height="24"
-            xmlns="http://www.w3.org/2000/svg"
-            fillRule="evenodd"
-            clipRule="evenodd"
-          >
-            <path d="M12 0c6.627 0 12 5.373 12 12s-5.373 12-12 12-12-5.373-12-12 5.373-12 12-12zm-1 17.414l-4.293-4.293-1.414 1.414 5.707 5.707 9.293-9.293-1.414-1.414-7.879 7.879z" />
-          </svg>
-        ) : connectionError ? (
-          <img
-            width="24"
-            height="24"
-            src="https://img.icons8.com/ios/50/error--v1.png"
-            alt="error--v1"
-          />
-        ) : (
-          <div style={{ display: "flex", gap: "4px" }}>
-            <span className="dot"></span>
-            <span className="dot"></span>
-            <span className="dot"></span>
-          </div>
-        )}
-      </div>
-    );
-  };
 
   return (
     <Container
@@ -86,6 +35,7 @@ const Lobby : React.FC<LobbyProps> = ({
       <ConnectionStatusBox
         isConnected={!!connection}
         onErrorClick={() => connectionError ? onRetryConnection : false}
+        connectionError={connectionError}
       />
       <Row className="justify-content-center">
         <Col xs={12} md={12} lg={12}>
