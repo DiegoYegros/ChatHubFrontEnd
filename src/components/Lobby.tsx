@@ -46,12 +46,7 @@ const Lobby: React.FC<LobbyProps> = ({
             onSubmit={(e) => {
               e.preventDefault();
               if (room) {
-                const roomObject: Room = {
-                  name: room.name,
-                  id: "",
-                  connectedUsers: 0,
-                };
-                joinRoom(user, roomObject);
+                joinRoom(user, room);
               }
             }}
           >
