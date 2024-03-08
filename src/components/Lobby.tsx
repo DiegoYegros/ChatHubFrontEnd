@@ -20,7 +20,7 @@ const Lobby: React.FC<LobbyProps> = ({
   onRetryConnection,
 }) => {
   const [user, setUser] = useState<string>("");
-  const [room, setRoom] = useState<string>();
+  const [room, setRoom] = useState<Room>();
 
   return (
     <Container
@@ -47,7 +47,7 @@ const Lobby: React.FC<LobbyProps> = ({
               e.preventDefault();
               if (room) {
                 const roomObject: Room = {
-                  name: room,
+                  name: room.name,
                   id: "",
                   connectedUsers: 0,
                 };
@@ -66,7 +66,14 @@ const Lobby: React.FC<LobbyProps> = ({
                 size="lg"
                 className="mb-2 dark-input"
                 placeholder="room"
-                onChange={(e) => setRoom(e.target.value)}
+                onChange={(e) => {
+                  const room: Room = {
+                    name: e.target.value,
+                    id: "",
+                    connectedUsers: 0,
+                  };
+                  setRoom(room);
+                }}
               />
             </Form.Group>
             <Button
