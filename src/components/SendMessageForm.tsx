@@ -8,13 +8,14 @@ import {
   Row,
 } from "react-bootstrap";
 import uploadIcon from "../assets/uploadIcon.png";
+import useFormInput from "../hooks/useFormInput";
 
 interface Props {
   sendMessage: (message: string, imageData: string) => void;
 }
 
 const SendMessageForm: React.FC<Props> = ({sendMessage}) => {
-  const [message, setMessage] = useState("");
+  const message = useFormInput();
   const [imageData, setImageData] = useState<any>({imageData: ""});
   const fileInputRef = useRef<any>(null);
 
@@ -46,8 +47,6 @@ const SendMessageForm: React.FC<Props> = ({sendMessage}) => {
     }
   };
   const handleSubmit = () => {
-    sendMessage(message, imageData);
-    setMessage("");
     setImageData("");
   };
   return (
@@ -59,8 +58,7 @@ const SendMessageForm: React.FC<Props> = ({sendMessage}) => {
               as="textarea"
               className="message-input dark-input"
               placeholder="Message..."
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
+              {...message}
               onKeyDown={handleKeyDown}
             />
             <Button variant="send-image" onClick={handleImageUploadClick}>

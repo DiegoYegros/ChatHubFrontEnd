@@ -5,14 +5,14 @@ import ConnectionStatusBox from "./ConnectionStatusBox";
 import Rooms from "./Rooms";
 
 interface LobbyProps {
-  joinRoom: (user: string, room: string) => object;
-  rooms: string[];
+  joinRoom: (user: string, room: Room) => object;
+  rooms: Room[];
   connection: HubConnection | null;
   connectionError: boolean;
   onRetryConnection: () => Promise<void>;
 }
 
-const Lobby : React.FC<LobbyProps> = ({
+const Lobby: React.FC<LobbyProps> = ({
   joinRoom,
   rooms,
   connection,
@@ -20,8 +20,7 @@ const Lobby : React.FC<LobbyProps> = ({
   onRetryConnection,
 }) => {
   const [user, setUser] = useState<string>("");
-  const [room, setRoom] = useState<string>("");
-
+  const [room, setRoom] = useState<string>();
 
   return (
     <Container
@@ -34,7 +33,7 @@ const Lobby : React.FC<LobbyProps> = ({
     >
       <ConnectionStatusBox
         isConnected={!!connection}
-        onErrorClick={() => connectionError ? onRetryConnection : false}
+        onErrorClick={() => (connectionError ? onRetryConnection : false)}
         connectionError={connectionError}
       />
       <Row className="justify-content-center">
@@ -46,7 +45,14 @@ const Lobby : React.FC<LobbyProps> = ({
             className="lobby"
             onSubmit={(e) => {
               e.preventDefault();
-              joinRoom(user, room);
+              if (room) {
+                const roomObject: Room = {
+                  name: room,
+                  id: "",
+                  connectedUsers: 0,
+                };
+                joinRoom(user, roomObject);
+              }
             }}
           >
             <Form.Group>

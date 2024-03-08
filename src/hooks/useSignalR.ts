@@ -6,10 +6,10 @@ import {
 import { useEffect, useState } from "react";
 
 const useSignalR = () => {
-  const URL: string = "https://chathub-hsrb.onrender.com/chat";
+  const URL: string = "http://localhost:5293/chat";
     const [connection, setConnection] = useState<HubConnection | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [rooms, setRooms] = useState<string[]>([]);
+  const [rooms, setRooms] = useState<Room[]>([]);
   const [users, setUsers] = useState<string[]>([]);
   const [connectionError, setConnectionError] = useState<boolean>(false);
 
@@ -82,9 +82,11 @@ const useSignalR = () => {
     }
   };
 
-  const joinRoom = async (user: string, room: string) => {
+  const joinRoom = async (user: string, room: Room) => {
     if (connection) {
-      await connection.invoke("JoinRoom", { user, room });
+      let roomName =room.name
+      console.log("RoomName: " +roomName)
+      await connection.invoke("JoinRoom", { user, room: roomName });
     } else {
       console.error("Connection not established yet.");
     }

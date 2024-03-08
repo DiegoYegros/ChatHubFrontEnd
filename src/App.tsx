@@ -6,14 +6,22 @@ import Lobby from "./components/Lobby";
 import useSignalR from "./hooks/useSignalR";
 import "./models/Message";
 const App: React.FC = () => {
-  
-  const { connection, messages, rooms, users, connectionError, sendMessage, joinRoom, initConnection } = useSignalR();
-  const [room, setRoom] = useState<string | null>();
+  const {
+    connection,
+    messages,
+    rooms,
+    users,
+    connectionError,
+    sendMessage,
+    joinRoom,
+    initConnection,
+  } = useSignalR();
+  const [room, setRoom] = useState<Room>();
   const [, setUser] = useState<string | null>();
 
-  
-  const handleJoinRoom = async (user: string, room: string) => {
+  const handleJoinRoom = async (user: string, room: Room) => {
     await joinRoom(user, room);
+    console.log(room);
     setRoom(room);
     setUser(user);
   };
@@ -21,7 +29,7 @@ const App: React.FC = () => {
   const closeConnection = async () => {
     if (connection) {
       await connection.stop();
-      setRoom(null);
+      setRoom(undefined);
       initConnection();
     }
   };
@@ -42,7 +50,7 @@ const App: React.FC = () => {
           sendMessage={sendMessage}
           closeConnection={closeConnection}
           users={users}
-          currentConnectionId={connection ? connection.connectionId : ''}
+          currentConnectionId={connection ? connection.connectionId : ""}
           room={room}
         />
       )}

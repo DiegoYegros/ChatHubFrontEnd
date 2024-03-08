@@ -10,7 +10,7 @@ interface ChatProps {
   closeConnection: () => void;
   users: string[];
   currentConnectionId: string | null;
-  room: string;
+  room: Room;
 }
 
 const Chat: React.FC<ChatProps> = ({
@@ -26,7 +26,7 @@ const Chat: React.FC<ChatProps> = ({
       <Col lg={12} md={12} className="chat d-flex flex-column p-0">
         <Row className="align-items-center mb-2">
           <Col xs={6} md={8} p-0 className="p-0">
-            <h2 className="mb-4 mt-4 room-title">Room: {room}</h2>
+            <h2 className="mb-4 mt-4 room-title">Room: {room.name}</h2>
           </Col>
           <Col xs={3} md={2} className="text-end p-0">
             <Button
