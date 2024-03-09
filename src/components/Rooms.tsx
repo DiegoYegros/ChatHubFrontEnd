@@ -12,6 +12,7 @@ const Rooms: React.FC<RoomsProps> = ({ rooms, user, joinRoom }) => {
       <h2 className="mb-4 mt-4 d-flex justify-content-center adaptative-title">
         Available Rooms
       </h2>
+
       <Row>
         {rooms.map((room, index) => (
           <Room

@@ -14,15 +14,15 @@ interface Props {
   sendMessage: (message: string, imageData: string) => void;
 }
 
-const SendMessageForm: React.FC<Props> = ({sendMessage}) => {
+const SendMessageForm: React.FC<Props> = ({ sendMessage }) => {
   const message = useFormInput();
-  const [imageData, setImageData] = useState<any>({imageData: ""});
+  const [imageData, setImageData] = useState<any>({ imageData: "" });
   const fileInputRef = useRef<any>(null);
 
   const handleImageUploadClick = () => {
-        if (fileInputRef.current != null){
-          fileInputRef.current.click();
-        }
+    if (fileInputRef.current != null) {
+      fileInputRef.current.click();
+    }
   };
 
   const handleImageChange = (e: any) => {
@@ -37,7 +37,11 @@ const SendMessageForm: React.FC<Props> = ({sendMessage}) => {
     }
   };
 
-  const handleKeyDown = (e: { key: string; shiftKey: any; preventDefault: () => void; }) => {
+  const handleKeyDown = (e: {
+    key: string;
+    shiftKey: any;
+    preventDefault: () => void;
+  }) => {
     if (e.key === "Enter" && e.shiftKey) {
       return;
     }
@@ -47,6 +51,9 @@ const SendMessageForm: React.FC<Props> = ({sendMessage}) => {
     }
   };
   const handleSubmit = () => {
+    console.log("message.value: " + message.value);
+
+    sendMessage(message.value, imageData);
     setImageData("");
   };
   return (

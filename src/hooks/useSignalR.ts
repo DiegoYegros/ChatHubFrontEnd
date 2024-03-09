@@ -85,7 +85,7 @@ const useSignalR = () => {
   const joinRoom = async (user: string, room: Room) => {
     if (connection) {
       let roomName =room.name
-      console.log("RoomName: " +roomName)
+      console.log(room)
       await connection.invoke("JoinRoom", { user, room: roomName });
     } else {
       console.error("Connection not established yet.");
