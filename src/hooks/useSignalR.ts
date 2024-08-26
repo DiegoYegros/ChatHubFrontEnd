@@ -4,6 +4,7 @@ import {
   LogLevel,
 } from "@microsoft/signalr";
 import { useEffect, useState } from "react";
+import Message from "../models/Message";
 
 const useSignalR = () => {
 const URL: string = process.env.REACT_APP_SIGNALR_URL ?? (() => {
