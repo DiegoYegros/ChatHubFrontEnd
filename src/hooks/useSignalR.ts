@@ -7,9 +7,7 @@ import { useEffect, useState } from "react";
 import Message from "../models/Message";
 
 const useSignalR = () => {
-const URL: string = process.env.REACT_APP_SIGNALR_URL ?? (() => {
-  throw new Error("REACT_APP_SIGNALR_URL is not defined");
-    })();
+const URL: string = "http://5.78.108.242:8080/chat"
   const [connection, setConnection] = useState<HubConnection | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [rooms, setRooms] = useState<string[]>([]);
