@@ -4,3 +4,4 @@ type Message = {
   connectionId: string;
   user: string;
 };
+export default Message;
