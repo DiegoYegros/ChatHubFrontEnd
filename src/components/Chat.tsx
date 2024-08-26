@@ -2,6 +2,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import ConnectedUsersDropdown from "./ConnectedUsersDropdown";
 import MessageContainer from "./MessageContainer";
 import SendMessageForm from "./SendMessageForm";
+import Message from "../models/Message";
 
 
 interface ChatProps {
