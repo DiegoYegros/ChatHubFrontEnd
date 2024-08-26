@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Message from "../models/Message";
 
 const useSignalR = () => {
-const URL: string = "http://5.78.108.242:8080/chat"
+const URL: string = "https://backend.diegoyegros.com/chat"
   const [connection, setConnection] = useState<HubConnection | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [rooms, setRooms] = useState<string[]>([]);
