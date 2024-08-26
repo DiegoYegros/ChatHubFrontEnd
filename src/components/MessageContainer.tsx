@@ -1,5 +1,6 @@
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import Message from "../models/Message";
 
 interface Props {
 
