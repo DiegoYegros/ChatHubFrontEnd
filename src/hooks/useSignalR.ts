@@ -6,8 +6,10 @@ import {
 import { useEffect, useState } from "react";
 
 const useSignalR = () => {
-  const URL: string = process.env.REACT_APP_SIGNALR_URL;
-    const [connection, setConnection] = useState<HubConnection | null>(null);
+const URL: string = process.env.REACT_APP_SIGNALR_URL ?? (() => {
+  throw new Error("REACT_APP_SIGNALR_URL is not defined");
+    })();
+  const [connection, setConnection] = useState<HubConnection | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [rooms, setRooms] = useState<string[]>([]);
   const [users, setUsers] = useState<string[]>([]);
