@@ -35,7 +35,7 @@ jobs:
       env:
         REACT_APP_API_URL: ${{ secrets.REACT_APP_SIGNALR_URL }}
         CI: false
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "<>"
