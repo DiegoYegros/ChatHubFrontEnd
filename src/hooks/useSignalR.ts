@@ -6,7 +6,7 @@ import {
 import { useEffect, useState } from "react";
 
 const useSignalR = () => {
-  const URL: string = "https://chathub-hsrb.onrender.com/chat";
+  const URL: string = process.env.REACT_APP_SIGNALR_URL;
     const [connection, setConnection] = useState<HubConnection | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [rooms, setRooms] = useState<string[]>([]);
