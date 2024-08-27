@@ -48,24 +48,37 @@ const Rooms: React.FC<Props> = ({ rooms, user, joinRoom }) => {
 
   const handleNameChange = (e: { target: { value: SetStateAction<string>; }; }) => setInputName(e.target.value);
 
+  const cardStyle = {
+    width: "100%",
+    cursor: "pointer",
+    transition: "border 0.3s ease-in-out",
+  };
+
+  const cardHoverStyle = {
+    ...cardStyle,
+    border: "2px solid rgb(0,123,255)",
+  };
+
   return (
     <>
-      <h2 className="mb-4 mt-4 d-flex justify-content-center adaptative-title">
+      <h2 className="mb-4 mt-4 d-flex justify-content-center adaptative-title" style={{ color: '#e1dfdf' }}>
         Available Rooms
       </h2>
       <Row>
         {rooms.map((roomArray: any, index) => (
           <Col key={index} xs={12} sm={6} md={4} lg={3} className="mb-3">
             <div
-              className="card text-white bg-dark position-relative card-hoverable"
-              style={{ width: "100%" }}
+              className="card text-white bg-dark position-relative"
+              style={cardStyle}
+              onMouseEnter={(e) => e.currentTarget.style.border = "2px solid rgb(0,123,255)"}
+              onMouseLeave={(e) => e.currentTarget.style.border = "none"}
               onClick={() => handleShow(roomArray[0].room)}
             >
               <div className="card-body">
-                <h5 className="card-title">{roomArray[0].room}</h5>
+                <h5 className="card-title" style={{ color: '#e1dfdf', border: 'none' }}>{roomArray[0].room}</h5>
               </div>
-              <div className="position-absolute bottom-right">
-                <small className="white-color">{roomArray.length}/20</small>
+              <div style={{ position: 'absolute', right: '6px', bottom: '2px' }}>
+                <small style={{ color: '#e1dfdf' }}>{roomArray.length}/20</small>
               </div>
             </div>
           </Col>

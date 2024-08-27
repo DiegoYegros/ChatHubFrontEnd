@@ -5,10 +5,10 @@ interface ConnectedUsersDropdownProps {
   className: string;
 }
 
-const ConnectedUsersDropdown : React.FC<ConnectedUsersDropdownProps> = ({ users }) => (
-  <Dropdown align="end" className="d-flex justify-content-end">
-    <Dropdown.Toggle variant="primary">
-      {users.length === 1 ? users.length + " user" : users.length + " users"}
+const ConnectedUsersDropdown: React.FC<ConnectedUsersDropdownProps> = ({ users, className }) => (
+  <Dropdown>
+    <Dropdown.Toggle variant="secondary" id="dropdown-basic" className={className}>
+      {users.length} User{users.length !== 1 ? 's' : ''}
     </Dropdown.Toggle>
 
     <Dropdown.Menu className="dark-input-menu no-border">
